@@ -102,7 +102,7 @@ export const App = () => {
 //styles
 const useStyles = createUseStyles({
   App: {
-    height: "100vh",
+    height: window.innerHeight,
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
