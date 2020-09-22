@@ -104,7 +104,7 @@ const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
     width: "100vw",
-    height: "84vh",
+    height: window.innerHeight * 0.84,
     alignItems: "center",
     overflowY: "scroll",
   },

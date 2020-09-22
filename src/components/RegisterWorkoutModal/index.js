@@ -134,14 +134,14 @@ export default RegisterWorkoutModal;
 const useStyles = createUseStyles({
   modal: { display: "flex", justifyContent: "center", alignItems: "center" },
   container: {
-    height: "80vh",
+    height: window.innerHeight * 0.8,
     width: "50vw",
     backgroundColor: "#f5f5f5",
     borderRadius: 12,
   },
   "@media (max-width: 900px)": {
     container: {
-      height: "80vh",
+      height: window.innerHeight * 0.8,
       width: "100vw",
       backgroundColor: "#f5f5f5",
       borderRadius: 12,
@@ -151,7 +151,7 @@ const useStyles = createUseStyles({
   header: {
     display: "flex",
     flexDirection: "row",
-    height: "5vh",
+    height: window.innerHeight * 0.05,
     backgroundColor: "#3f51b5",
     padding: 8,
     borderTopLeftRadius: 12,
@@ -170,7 +170,7 @@ const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
     padding: 8,
-    height: "70vh",
+    height: window.innerHeight * 0.7,
   },
   inputText: {
     width: "100%",
@@ -184,7 +184,7 @@ const useStyles = createUseStyles({
   },
 
   divisor: {
-    height: "2vh",
+    height: window.innerHeight * 0.02,
     padding: 8,
     paddingTop: 16,
     paddingBottom: 16,

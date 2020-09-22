@@ -26,7 +26,7 @@ const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    height: "5vh",
+    height: window.innerHeight * 0.05,
     width: "90%",
     backgroundColor: "#e5e5e5",
     padding: 8,
