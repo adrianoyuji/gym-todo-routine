@@ -60,33 +60,39 @@ function Home({ schedule, session, setSession, checkboxes, setCheckboxes }) {
     );
   };
 
+  const renderSchedule = () => {
+    return !!schedule ? (
+      <>
+        {schedule.map((workout, index) => (
+          <Paper elevation={3} className={classes.paperContainer} key={index}>
+            <Typography variant="h5">{workout.title}</Typography>
+            {workout.workouts.map((exercise, index) => (
+              <div className={classes.exercisesList} key={index}>
+                <Typography variant="h6" className={classes.flexGrow}>
+                  {exercise.title}
+                </Typography>
+                <Typography variant="h6">
+                  {exercise.series} x {exercise.reps}
+                </Typography>
+              </div>
+            ))}
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.startButton}
+              onClick={() => setSession(workout)}
+            >
+              Start
+            </Button>
+          </Paper>
+        ))}
+      </>
+    ) : null;
+  };
+
   return (
     <div className={classes.container}>
-      {!!session
-        ? renderWorkoutSession()
-        : schedule.map((workout, index) => (
-            <Paper elevation={3} className={classes.paperContainer} key={index}>
-              <Typography variant="h5">{workout.title}</Typography>
-              {workout.workouts.map((exercise, index) => (
-                <div className={classes.exercisesList} key={index}>
-                  <Typography variant="h6" className={classes.flexGrow}>
-                    {exercise.title}
-                  </Typography>
-                  <Typography variant="h6">
-                    {exercise.series} x {exercise.reps}
-                  </Typography>
-                </div>
-              ))}
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.startButton}
-                onClick={() => setSession(workout)}
-              >
-                Start
-              </Button>
-            </Paper>
-          ))}
+      {!!session ? renderWorkoutSession() : renderSchedule()}
     </div>
   );
 }

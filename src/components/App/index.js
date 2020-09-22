@@ -15,33 +15,7 @@ import Settings from "../Settings";
 
 export const App = () => {
   const [loading, setLoading] = useState(true);
-  const [schedule, setSchedule] = useState([
-    {
-      title: "Treino A",
-      workouts: [
-        { title: "Flexão", series: "3", reps: "5" },
-        { title: "Supino", series: "3", reps: "10" },
-      ],
-    },
-    {
-      title: "Treino B",
-      workouts: [
-        { title: "Leg press", series: "3", reps: "5" },
-        { title: "Agachamento", series: "3", reps: "10" },
-      ],
-    },
-    {
-      title: "Treino C",
-      workouts: [
-        { title: "Rosca direta", series: "3", reps: "5" },
-        { title: "Triceps corda", series: "3", reps: "10" },
-        { title: "aaa", series: "3", reps: "5" },
-        { title: "bb", series: "3", reps: "10" },
-        { title: "cc", series: "3", reps: "5" },
-        { title: "dd", series: "3", reps: "10" },
-      ],
-    },
-  ]);
+  const [schedule, setSchedule] = useState([]);
   const [navigation, setNavigation] = useState("home");
   const [session, setSession] = useState(null);
   const [checkboxes, setCheckboxes] = useState({});
@@ -57,6 +31,18 @@ export const App = () => {
       setCheckboxes(checkboxList);
     }
   }, [session]);
+
+  useEffect(() => {
+    let localStorageSchedule = localStorage.getItem("scheduleList");
+    if (!!localStorageSchedule) {
+      setSchedule(JSON.parse(localStorageSchedule));
+    }
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("scheduleList", JSON.stringify([...schedule]));
+  }, [schedule]);
 
   const renderTitle = {
     edit: () => "Manage Workouts",
@@ -78,7 +64,9 @@ export const App = () => {
     settings: () => <Settings />,
   };
 
-  return (
+  return loading ? (
+    <div>cu</div>
+  ) : (
     <div className={classes.App}>
       <AppBar position="static" className={classes.appBar}>
         <Typography variant="h6" className={classes.title}>
