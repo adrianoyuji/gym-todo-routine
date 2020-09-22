@@ -23,7 +23,7 @@ function RegisterWorkoutModal({
     setRoutine(
       !!prevRoutine ? { ...prevRoutine } : { title: "", workouts: [] }
     );
-  }, [open]);
+  }, [open, prevRoutine]);
 
   return (
     <Modal open={open} onClose={handleClose} className={classes.modal}>

@@ -1,9 +1,20 @@
 import React from "react";
-
-// import { Container } from './styles';
+import { createUseStyles } from "react-jss";
 
 function Settings() {
-  return <div />;
+  const classes = useStyles();
+  return <div className={classes.container}>WIP</div>;
 }
 
 export default Settings;
+
+const useStyles = createUseStyles({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100vw",
+    height: "84vh",
+    alignItems: "center",
+    overflowY: "scroll",
+  },
+});

@@ -16,7 +16,7 @@ function Home({ schedule, session, setSession, checkboxes, setCheckboxes }) {
       }
       setEndedSession(condition);
     }
-  }, [checkboxes]);
+  }, [checkboxes, session]);
 
   const renderWorkoutSession = () => {
     return (
