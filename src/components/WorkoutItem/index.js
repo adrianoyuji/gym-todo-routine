@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { createUseStyles } from "react-jss";
-import { Modal, Button, Typography, Paper } from "@material-ui/core";
+import { Typography, Paper } from "@material-ui/core";
 
 import Icon from "@material-ui/core/Icon";
-
-// import { Container } from './styles';
 
 function WorkoutItem({ workout, handleEditItem, handleDeleteItem, index }) {
   const classes = useStyles();

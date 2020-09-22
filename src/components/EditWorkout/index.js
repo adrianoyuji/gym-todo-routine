@@ -1,24 +1,31 @@
 import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
-import { Button, Fab } from "@material-ui/core";
+import { Fab } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 import RegisterWorkoutModal from "../RegisterWorkoutModal";
 import WorkoutItem from "../WorkoutItem";
 
 function EditWorkout({ schedule, setSchedule }) {
   const [registerModal, setRegisterModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   const classes = useStyles();
 
   const handleSaveForm = (routine) => {
     setSchedule([...schedule, routine]);
   };
   const handleEditItem = (index) => {
-    setSelectedItem(schedule[index]);
+    setSelectedItem({ ...schedule[index] });
+    setSelectedItemIndex(index);
     setRegisterModal(true);
   };
   const handleDeleteItem = (index) => {
     setSchedule(schedule.filter((workout, i) => i !== index));
+  };
+  const handleUpdateItem = (routine) => {
+    let newSchedule = [...schedule];
+    newSchedule[selectedItemIndex] = routine;
+    setSchedule([...newSchedule]);
   };
 
   return (
@@ -39,7 +46,7 @@ function EditWorkout({ schedule, setSchedule }) {
           color="primary"
           aria-label="add"
           onClick={() => {
-            setSelectedItem(false);
+            setSelectedItem(null);
             setRegisterModal(true);
           }}
         >
@@ -50,8 +57,10 @@ function EditWorkout({ schedule, setSchedule }) {
         open={registerModal}
         handleClose={() => {
           setRegisterModal(false);
-          setSelectedItem(false);
+          setSelectedItemIndex(null);
+          setSelectedItem(null);
         }}
+        handleUpdateItem={handleUpdateItem}
         handleSaveForm={handleSaveForm}
         prevRoutine={!!selectedItem && selectedItem}
       />

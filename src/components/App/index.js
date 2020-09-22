@@ -35,22 +35,46 @@ export const App = () => {
       workouts: [
         { title: "Rosca direta", series: "3", reps: "5" },
         { title: "Triceps corda", series: "3", reps: "10" },
+        { title: "aaa", series: "3", reps: "5" },
+        { title: "bb", series: "3", reps: "10" },
+        { title: "cc", series: "3", reps: "5" },
+        { title: "dd", series: "3", reps: "10" },
       ],
     },
   ]);
-  const [navigation, setNavigation] = useState("edit");
+  const [navigation, setNavigation] = useState("home");
+  const [session, setSession] = useState(null);
+  const [checkboxes, setCheckboxes] = useState({});
 
   const classes = useStyles();
+  useEffect(() => {
+    if (!!session) {
+      let checkboxList = {};
+      session.workouts.forEach(
+        (ex) => (checkboxList = { ...checkboxList, [ex.title]: false })
+      );
+
+      setCheckboxes(checkboxList);
+    }
+  }, [session]);
 
   const renderTitle = {
-    edit: () => "Edit Workout",
+    edit: () => "Manage Workouts",
     home: () => "Home",
     settings: () => "Settings",
   };
 
   const renderComponent = {
     edit: () => <EditWorkout schedule={schedule} setSchedule={setSchedule} />,
-    home: () => <Home />,
+    home: () => (
+      <Home
+        schedule={schedule}
+        session={session}
+        setSession={setSession}
+        checkboxes={checkboxes}
+        setCheckboxes={setCheckboxes}
+      />
+    ),
     settings: () => <Settings />,
   };
 

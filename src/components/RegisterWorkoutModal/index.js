@@ -8,6 +8,7 @@ function RegisterWorkoutModal({
   handleClose,
   prevRoutine,
   handleSaveForm,
+  handleUpdateItem,
 }) {
   const [routine, setRoutine] = useState({ title: "", workouts: [] });
   const classes = useStyles();
@@ -29,7 +30,7 @@ function RegisterWorkoutModal({
       <div className={classes.container}>
         <div className={classes.header}>
           <Typography variant="h6" className={classes.title}>
-            New Workout Form
+            {!!prevRoutine ? "Edit Workout" : "New Workout"}
           </Typography>
           <Icon className={classes.closeIcon} onClick={handleClose}>
             close
@@ -114,7 +115,9 @@ function RegisterWorkoutModal({
             variant="contained"
             color="primary"
             onClick={() => {
-              handleSaveForm(routine);
+              !!prevRoutine
+                ? handleUpdateItem(routine)
+                : handleSaveForm(routine);
               handleClose();
             }}
           >
