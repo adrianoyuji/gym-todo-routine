@@ -39,7 +39,7 @@ function RegisterWorkoutModal({
         <div className={classes.body}>
           <form className={classes.form}>
             <TextField
-              variant="outlined"
+              variant="filled"
               value={routine.title}
               label="Workout Name"
               placeholder="Workout A"
@@ -64,44 +64,63 @@ function RegisterWorkoutModal({
               {!!routine.workouts.length ? (
                 routine.workouts.map((workout, index) => (
                   <div className={classes.workoutForm} key={index}>
-                    <TextField
-                      variant="outlined"
-                      value={workout.title}
-                      label="Name"
-                      placeholder="Push ups"
-                      className={classes.inputTextWorkoutTitle}
-                      onChange={(e) => {
-                        let newRoutine = { ...routine };
-                        newRoutine.workouts[index].title = e.target.value;
-                        setRoutine({ ...newRoutine });
+                    <div className={classes.inputTextWorkoutTitle}>
+                      <TextField
+                        variant="filled"
+                        value={workout.title}
+                        label="Name"
+                        placeholder="Push ups"
+                        onChange={(e) => {
+                          let newRoutine = { ...routine };
+                          newRoutine.workouts[index].title = e.target.value;
+                          setRoutine({ ...newRoutine });
+                        }}
+                        className={classes.maxWidth}
+                      />
+                    </div>
+                    <div className={classes.inputTextWorkout}>
+                      <TextField
+                        type="number"
+                        variant="filled"
+                        value={workout.series}
+                        label="Series"
+                        placeholder="4"
+                        className={classes.maxWidth}
+                        onChange={(e) => {
+                          let newRoutine = { ...routine };
+                          newRoutine.workouts[index].series = e.target.value;
+                          setRoutine({ ...newRoutine });
+                        }}
+                      />
+                    </div>
+                    <div className={classes.inputTextWorkout}>
+                      <TextField
+                        type="number"
+                        variant="filled"
+                        value={workout.reps}
+                        label="Reps"
+                        placeholder="10"
+                        onChange={(e) => {
+                          let newRoutine = { ...routine };
+                          newRoutine.workouts[index].reps = e.target.value;
+                          setRoutine({ ...newRoutine });
+                        }}
+                        className={classes.maxWidth}
+                      />
+                    </div>
+                    <Icon
+                      className={classes.delete}
+                      onClick={() => {
+                        setRoutine({
+                          ...routine,
+                          workouts: routine.workouts.filter(
+                            (item, i) => i !== index
+                          ),
+                        });
                       }}
-                    />
-                    <TextField
-                      type="number"
-                      variant="outlined"
-                      value={workout.series}
-                      label="Series"
-                      placeholder="4"
-                      className={classes.inputTextWorkout}
-                      onChange={(e) => {
-                        let newRoutine = { ...routine };
-                        newRoutine.workouts[index].series = e.target.value;
-                        setRoutine({ ...newRoutine });
-                      }}
-                    />
-                    <TextField
-                      type="number"
-                      variant="outlined"
-                      value={workout.reps}
-                      label="Reps"
-                      placeholder="10"
-                      className={classes.inputTextWorkout}
-                      onChange={(e) => {
-                        let newRoutine = { ...routine };
-                        newRoutine.workouts[index].reps = e.target.value;
-                        setRoutine({ ...newRoutine });
-                      }}
-                    />
+                    >
+                      delete
+                    </Icon>
                   </div>
                 ))
               ) : (
@@ -142,12 +161,16 @@ const useStyles = createUseStyles({
   "@media (max-width: 900px)": {
     container: {
       height: window.innerHeight * 0.8,
-      width: "100vw",
+      width: "95vw",
       backgroundColor: "#f5f5f5",
       borderRadius: 12,
     },
   },
-
+  delete: {
+    color: "crimson",
+    cursor: "pointer",
+    paddingLeft: 8,
+  },
   header: {
     display: "flex",
     flexDirection: "row",
@@ -181,8 +204,11 @@ const useStyles = createUseStyles({
     flexDirection: "column",
     flexGrow: 1,
     overflowY: "scroll",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
-
+  maxWidth: { width: "100%" },
   divisor: {
     height: window.innerHeight * 0.02,
     padding: 8,
@@ -200,7 +226,6 @@ const useStyles = createUseStyles({
     display: "flex",
     flexDirection: "column",
     height: "100%",
-    alignItems: "center",
   },
   addWorkout: {
     color: "forestGreen",
@@ -216,8 +241,10 @@ const useStyles = createUseStyles({
   },
   inputTextWorkout: {
     flex: 1,
+    marginRight: 4,
   },
   inputTextWorkoutTitle: {
-    flex: 3,
+    flex: 2,
+    marginRight: 4,
   },
 });

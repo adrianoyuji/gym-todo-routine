@@ -86,6 +86,9 @@ const useStyles = createUseStyles({
     height: window.innerHeight * 0.84,
     alignItems: "center",
     overflowY: "scroll",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
   floatingAddButton: {
     position: "fixed",
