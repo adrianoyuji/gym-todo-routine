@@ -151,12 +151,19 @@ function RegisterWorkoutModal({
 export default RegisterWorkoutModal;
 
 const useStyles = createUseStyles({
-  modal: { display: "flex", justifyContent: "center", alignItems: "center" },
+  modal: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
     height: window.innerHeight * 0.8,
     width: "50vw",
     backgroundColor: "#f5f5f5",
     borderRadius: 12,
+    "&:focus": {
+      outline: "none",
+    },
   },
   "@media (max-width: 900px)": {
     container: {
